@@ -4,6 +4,8 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
 
+from .blocks import LinkBlock, StatusTypeBlock
+
 
 class HomePage(Page):
     logo = models.ForeignKey(
@@ -92,10 +94,13 @@ class HomePage(Page):
 
     max_count = 1
 
-    def get_context(self, request):
-        context = super().get_context(request)
-        context["campaigns"] = CampaignPage.objects.child_of(self).live()
-        return context
+    @property
+    def campaigns(self):
+        return CampaignPage.objects.child_of(self).live()
+
+    class Meta:
+        verbose_name = "Domača stran"
+        verbose_name_plural = "Domače strani"
 
 
 class CampaignPage(Page):
@@ -116,29 +121,7 @@ class CampaignPage(Page):
     )
     links = StreamField(
         [
-            (
-                "link",
-                blocks.StructBlock(
-                    [
-                        (
-                            "text",
-                            blocks.CharBlock(
-                                required=True,
-                                label="Besedilo povezave",
-                            ),
-                        ),
-                        (
-                            "url",
-                            blocks.URLBlock(
-                                required=True,
-                                label="Povezava, kamor vodi",
-                            ),
-                        ),
-                    ],
-                    icon="link",
-                    label="Povezava",
-                ),
-            ),
+            ("link", LinkBlock()),
         ],
         null=True,
         blank=True,
@@ -152,4 +135,88 @@ class CampaignPage(Page):
         FieldPanel("links"),
     ]
 
-    parent_page_type = ["home.HomePage"]
+    parent_page_types = ["home.HomePage"]
+
+    @property
+    def timelines(self):
+        return TimelinePage.objects.child_of(self).live()
+
+    class Meta:
+        verbose_name = "Kampanja"
+        verbose_name_plural = "Kampanje"
+
+
+class TimelinePage(Page):
+    icon = models.ForeignKey(
+        "wagtailimages.Image",
+        on_delete=models.SET_NULL,
+        related_name="+",
+        null=True,
+        blank=True,
+        verbose_name="Ikona",
+        help_text="Ikona časovnice",
+    )
+    statuses = StreamField(
+        [
+            (
+                "status",
+                blocks.StructBlock(
+                    [
+                        (
+                            "status_type",
+                            StatusTypeBlock(),
+                        ),
+                        (
+                            "title",
+                            blocks.CharBlock(
+                                required=True,
+                                label="Naslov statusa",
+                            ),
+                        ),
+                        (
+                            "status_text",
+                            blocks.CharBlock(
+                                required=False,
+                                label="Besedilo statusa",
+                                help_text="Kratka besedilna oznaka, ki se prikaže pod naslovom",
+                            ),
+                        ),
+                        (
+                            "description",
+                            blocks.RichTextBlock(
+                                required=False,
+                                label="Opis statusa",
+                            ),
+                        ),
+                        (
+                            "links",
+                            blocks.StreamBlock(
+                                [
+                                    ("link", LinkBlock()),
+                                ],
+                                label="Povezave",
+                                required=False,
+                            ),
+                        ),
+                    ],
+                    icon="radio-empty",
+                    label="Status",
+                ),
+            ),
+        ],
+        null=True,
+        blank=True,
+        verbose_name="Statusi",
+        help_text="Seznam statusov, ki se prikažejo v časovnici",
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("icon"),
+        FieldPanel("statuses"),
+    ]
+
+    parent_page_types = ["home.CampaignPage"]
+
+    class Meta:
+        verbose_name = "Časovnica"
+        verbose_name_plural = "Časovnice"

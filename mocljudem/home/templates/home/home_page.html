@@ -31,7 +31,7 @@
 </div>
 
 <hr>
-{% for campaign in campaigns %}
+{% for campaign in page.campaigns %}
 <div>
   <a href="{{ campaign.url }}">{{ campaign.title }}</a>
   <div>
@@ -45,6 +45,26 @@
       <a href="{{ link.value.url }}">{{ link.value.text }}</a>
     {% endfor %}
   </div>
+  {% for timeline in campaign.timelines %}
+  <div>
+    <a href="{{ timeline.url }}">{{ timeline.title }}</a>
+    <div>
+      {% image timeline.icon fill-100x100 %}
+    </div>
+    <div>
+      {% for status in timeline.statuses %}
+        <div>
+          <h4>{{ status.value.status_type }} - {{ status.value.title }}</h4>
+          <small>{{ status.value.status_text }}</small>
+          <p>{{ status.value.description|richtext }}</p>
+          {% for link in status.value.links %}
+            <a href="{{ link.value.url }}">{{ link.value.text }}</a>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
 </div>
 <hr>
 {% endfor %}
