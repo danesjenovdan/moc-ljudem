@@ -67,6 +67,11 @@ COPY --chown=wagtail:wagtail . .
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
 
+# Set the IPython directory to a temporary folder to avoid permission issues and
+# create the default profile directory with the correct user.
+ENV IPYTHONDIR=/tmp/ipython
+RUN mkdir -p $IPYTHONDIR/profile_default
+
 # Runtime command that executes when "docker run" is called, it does the
 # following:
 #   1. Migrate the database.
