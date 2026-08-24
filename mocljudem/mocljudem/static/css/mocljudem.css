@@ -1,0 +1,382 @@
+@font-face {
+  font-family: "wf-mango-grotesque";
+  font-weight: 600;
+  font-style: normal;
+  src: url("fonts/MangoGrotesque-SemiBold.woff2") format("woff2");
+}
+
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+*:not(dialog) {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* text-wrap: balance; */
+  line-height: 1.2;
+}
+
+/*
+  Generic Styles
+*/
+:root {
+  --color-white: #fff;
+  --color-black: #000;
+  --color-light-1: #f1ebe5;
+  --color-light-2: #fbf6f2;
+  --color-dark: #131211;
+  --color-babyblue: #94cff1;
+  --color-orange: #ff8600;
+  --color-green: #49e047;
+  --color-red: #ff613d;
+  --color-yellow: #ffd000;
+  --color-yellow-dark: #ffae00;
+  --color-violet: #ce9bff;
+  --gradient-1: linear-gradient(
+    90deg,
+    var(--color-yellow-dark) 25%,
+    var(--color-orange) 50%,
+    var(--color-red) 75%
+  );
+  --gradient-2: linear-gradient(
+    90deg,
+    var(--color-babyblue) 25%,
+    var(--color-violet) 50%,
+    var(--color-orange) 75%
+  );
+
+  --font-family: "wf-sofia-sans", sans-serif;
+  --font-family-alt: "wf-mango-grotesque", sans-serif;
+
+  --gutter: 1.75rem;
+
+  @media (max-width: 576px) {
+    --gutter: 1rem;
+  }
+}
+
+body {
+  background: var(--color-black);
+  font-family: var(--font-family);
+  color: var(--color-white);
+}
+
+/*
+.page-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+
+  > * {
+    width: 100%;
+  }
+
+  > .main-content {
+    flex: 1;
+  }
+}
+*/
+
+.container {
+  max-width: 75rem;
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+
+  > .no-gutter {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.page-header {
+  background: var(--color-dark);
+  padding-block: 0.75rem;
+}
+
+.hero-text {
+  max-width: 90ch;
+  margin-inline: auto;
+  padding-top: 8rem;
+  padding-bottom: 3rem;
+
+  .text {
+    font-family: var(--font-family-alt);
+    font-size: 10rem;
+    font-weight: 600;
+    line-height: 0.75;
+    letter-spacing: 1%;
+    text-align: center;
+
+    b {
+      background-image: var(--gradient-1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      &:last-of-type {
+        background-image: var(--gradient-2);
+      }
+    }
+  }
+
+  small {
+    margin-top: -0.75rem;
+    margin-inline: 6.25rem;
+    display: block;
+    font-size: 1rem;
+    font-style: italic;
+    text-align: right;
+  }
+}
+
+.lead-text {
+  max-width: 52ch;
+  margin-inline: auto;
+  padding-bottom: 3.5rem;
+  font-size: 1.625rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-align: center;
+
+  p:not(:last-child) {
+    margin-bottom: 0.75em;
+  }
+}
+
+.info-push-container {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  .info-push {
+    display: flex;
+    align-items: center;
+    color: inherit;
+    text-decoration: none;
+
+    .text,
+    .arrow {
+      background: var(--color-white);
+      color: var(--color-black);
+      border: 2px solid var(--color-black);
+      border-radius: 2rem;
+    }
+
+    .text {
+      display: block;
+      padding-block: 0.625rem;
+      padding-inline: 1.5rem 2rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .arrow {
+      display: grid;
+      place-items: center;
+      padding: 0.625rem;
+      margin-left: -1rem;
+      height: 3.75rem;
+      aspect-ratio: 1;
+      background: var(--color-babyblue);
+    }
+  }
+}
+
+.campaigns-container {
+  max-width: 56rem;
+  margin-inline: auto;
+  padding-top: 1.5rem;
+
+  .campaign {
+    background: var(--color-light-1);
+    border: 1px solid var(--color-black);
+    color: var(--color-black);
+
+    &:not(:last-child) {
+      margin-bottom: 4.5rem;
+    }
+
+    .info {
+      display: flex;
+      padding-block: 2.5rem 2rem;
+
+      .text-col {
+        flex: 1;
+        padding-inline: 2rem 1.25rem;
+
+        .title {
+          font-family: var(--font-family-alt);
+          font-size: 5rem;
+          line-height: 0.875;
+          font-weight: 600;
+        }
+
+        .description {
+          margin-top: 0.5rem;
+          font-size: 1.3125rem;
+          line-height: 1.2;
+        }
+
+        .links {
+          display: flex;
+          gap: 1.5rem;
+          margin-top: 1.25rem;
+
+          .arrow-link {
+            display: flex;
+            align-items: center;
+            color: inherit;
+            text-decoration: none;
+
+            .text,
+            .arrow {
+              background: var(--color-white);
+              color: var(--color-black);
+              border: 1px solid var(--color-black);
+              border-radius: 1.5rem;
+            }
+
+            .text {
+              display: block;
+              padding-block: 0.4375rem;
+              padding-inline: 1rem 1.25rem;
+              font-size: 1rem;
+              font-weight: 600;
+            }
+
+            .arrow {
+              display: grid;
+              place-items: center;
+              padding: 0.5rem;
+              margin-left: -0.675rem;
+              height: 2.5rem;
+              aspect-ratio: 1;
+              background: var(--color-babyblue);
+            }
+          }
+        }
+      }
+
+      .image-col {
+        flex-shrink: 0;
+        width: 8rem;
+
+        .image {
+          display: grid;
+          place-items: center;
+          width: 100%;
+          height: auto;
+          aspect-ratio: 1;
+          translate: 0.75rem 0;
+          background: var(--color-white);
+          border: 1px solid var(--color-black);
+
+          img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+
+    .timelines {
+      .title-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding-inline: 2.25rem;
+        padding-block: 0.3125rem;
+        background: var(--color-orange);
+        border: 1px solid var(--color-black);
+        border-width: 1px 0 1px 0;
+
+        .icon {
+          img {
+            width: auto;
+            height: 1.25rem;
+          }
+        }
+
+        .title {
+          font-size: 0.875rem;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

@@ -207,3 +207,6 @@ WAGTAILDOCS_EXTENSIONS = [
 
 # Maximum upload size for documents in bytes.
 WAGTAILDOCS_MAX_UPLOAD_SIZE = 10 * 1024 * 1024  # 10MB
+
+# Allowed file extensions for images. Added svg.
+WAGTAILIMAGES_EXTENSIONS = ["avif", "gif", "jpg", "jpeg", "png", "webp", "svg"]
