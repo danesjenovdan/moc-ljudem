@@ -30,4 +30,23 @@
   {% endfor %}
 </div>
 
+<hr>
+{% for campaign in campaigns %}
+<div>
+  <a href="{{ campaign.url }}">{{ campaign.title }}</a>
+  <div>
+    {{ campaign.description|richtext }}
+  </div>
+  <div>
+    {% image campaign.image fill-200x200 %}
+  </div>
+  <div>
+    {% for link in campaign.links %}
+      <a href="{{ link.value.url }}">{{ link.value.text }}</a>
+    {% endfor %}
+  </div>
+</div>
+<hr>
+{% endfor %}
+
 {% endblock content %}

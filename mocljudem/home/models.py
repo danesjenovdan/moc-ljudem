@@ -43,13 +43,15 @@ class HomePage(Page):
                         (
                             "text",
                             blocks.RichTextBlock(
-                                required=True, help_text="Besedilo na gumbu"
+                                required=True,
+                                label="Besedilo na gumbu",
                             ),
                         ),
                         (
                             "url",
                             blocks.URLBlock(
-                                required=True, help_text="Povezava, kamor gumb vodi"
+                                required=True,
+                                label="Povezava",
                             ),
                         ),
                     ],
@@ -64,7 +66,8 @@ class HomePage(Page):
                         (
                             "text",
                             blocks.RichTextBlock(
-                                required=True, help_text="Besedilo obvestila"
+                                required=True,
+                                label="Besedilo obvestila",
                             ),
                         ),
                     ],
@@ -86,3 +89,67 @@ class HomePage(Page):
         FieldPanel("lead_text"),
         FieldPanel("info_push"),
     ]
+
+    max_count = 1
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context["campaigns"] = CampaignPage.objects.child_of(self).live()
+        return context
+
+
+class CampaignPage(Page):
+    description = RichTextField(
+        null=True,
+        blank=True,
+        verbose_name="Opis",
+        help_text="Opis kampanje",
+    )
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        on_delete=models.SET_NULL,
+        related_name="+",
+        null=True,
+        blank=True,
+        verbose_name="Slika",
+        help_text="Slika kampanje",
+    )
+    links = StreamField(
+        [
+            (
+                "link",
+                blocks.StructBlock(
+                    [
+                        (
+                            "text",
+                            blocks.CharBlock(
+                                required=True,
+                                label="Besedilo povezave",
+                            ),
+                        ),
+                        (
+                            "url",
+                            blocks.URLBlock(
+                                required=True,
+                                label="Povezava, kamor vodi",
+                            ),
+                        ),
+                    ],
+                    icon="link",
+                    label="Povezava",
+                ),
+            ),
+        ],
+        null=True,
+        blank=True,
+        verbose_name="Povezave",
+        help_text="Povezave pod naslovom in opisom kampanje",
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("description"),
+        FieldPanel("image"),
+        FieldPanel("links"),
+    ]
+
+    parent_page_type = ["home.HomePage"]
