@@ -1,6 +1,7 @@
 from django.db import models
+from wagtail import blocks
 from wagtail.admin.panels import FieldPanel
-from wagtail.fields import RichTextField
+from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
 
 
@@ -33,10 +34,55 @@ class HomePage(Page):
         verbose_name="Opis",
         help_text="Opis, ki se prikaže pod hero sekcijo strani",
     )
+    info_push = StreamField(
+        [
+            (
+                "button",
+                blocks.StructBlock(
+                    [
+                        (
+                            "text",
+                            blocks.RichTextBlock(
+                                required=True, help_text="Besedilo na gumbu"
+                            ),
+                        ),
+                        (
+                            "url",
+                            blocks.URLBlock(
+                                required=True, help_text="Povezava, kamor gumb vodi"
+                            ),
+                        ),
+                    ],
+                    icon="link",
+                    label="Gumb",
+                ),
+            ),
+            (
+                "notice",
+                blocks.StructBlock(
+                    [
+                        (
+                            "text",
+                            blocks.RichTextBlock(
+                                required=True, help_text="Besedilo obvestila"
+                            ),
+                        ),
+                    ],
+                    icon="doc-full",
+                    label="Obvestilo",
+                ),
+            ),
+        ],
+        null=True,
+        blank=True,
+        verbose_name="Info push",
+        help_text="Elementi, ki so prikazani nad preostalo vsebino strani, npr. za obvestila ali akcije",
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("logo"),
         FieldPanel("hero_text"),
         FieldPanel("hero_text_source"),
         FieldPanel("lead_text"),
+        FieldPanel("info_push"),
     ]

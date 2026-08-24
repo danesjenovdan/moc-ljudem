@@ -20,4 +20,14 @@
   {{ page.lead_text|richtext }}
 </div>
 
+<div>
+  {% for info_push in page.info_push %}
+    {% if info_push.block_type == "button" %}
+      <a href="{{ info_push.value.url }}">{{ info_push.value.text|richtext }}</a>
+    {% elif info_push.block_type == "notice" %}
+      <div>{{ info_push.value.text|richtext }}</div>
+    {% endif %}
+  {% endfor %}
+</div>
+
 {% endblock content %}
