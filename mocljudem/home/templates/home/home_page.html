@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -7,5 +7,17 @@
 {% endblock extra_css %}
 
 {% block content %}
-home page template
+<header>
+{% image page.logo fill-200x200 %}
+</header>
+
+<div>
+  {{ page.hero_text|richtext }}
+  <small>{{ page.hero_text_source }}</small>
+</div>
+
+<div>
+  {{ page.lead_text|richtext }}
+</div>
+
 {% endblock content %}
