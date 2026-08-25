@@ -381,10 +381,6 @@ a {
 
     .timelines {
       .timeline {
-        &:not(:first-child) {
-          margin-top: 1rem;
-        }
-
         .title-row {
           display: flex;
           align-items: center;
@@ -418,9 +414,20 @@ a {
             gap: 0 0.75rem;
             padding-inline: 2.25rem;
             padding-block: 1rem;
+            background: var(--color-light-2);
 
             &:not(:last-child) {
               border-bottom: 1px solid var(--color-black);
+            }
+
+            &.expanded {
+              background: var(--color-white);
+
+              .expand-col {
+                .expand-button {
+                  transform: rotate(180deg);
+                }
+              }
             }
 
             &:first-child {
@@ -537,6 +544,10 @@ a {
 
             .description-col {
               grid-column: 2;
+
+              &[aria-hidden="true"] {
+                display: none;
+              }
 
               .description {
                 margin-top: 0.5rem;
