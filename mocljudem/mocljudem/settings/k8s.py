@@ -4,8 +4,18 @@ DEBUG = bool(os.getenv("DJANGO_DEBUG", False))
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "<TODO>")
 
-ALLOWED_HOSTS = ["mocljudem.si"]
-CSRF_TRUSTED_ORIGINS = ["https://mocljudem.si"]
+ALLOWED_HOSTS = [
+    "mocljudem.si",
+    "www.mocljudem.si",
+    "moc-ljudem.si",
+    "www.moc-ljudem.si",
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://mocljudem.si",
+    "https://www.mocljudem.si",
+    "https://moc-ljudem.si",
+    "https://www.moc-ljudem.si",
+]
 
 STATIC_ROOT = os.getenv("DJANGO_STATIC_ROOT", BASE_DIR / "static")
 STATIC_URL = os.getenv("DJANGO_STATIC_URL_BASE", "/static/")
