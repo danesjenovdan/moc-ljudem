@@ -52,6 +52,7 @@ python-dateutil==2.9.0.post0
 pytokens==0.4.1
 requests==2.34.2
 s3transfer==0.19.2
+sentry-sdk==2.68.1
 six==1.17.0
 soupsieve==2.9.2
 sqlparse==0.6.0

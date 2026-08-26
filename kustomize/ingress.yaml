@@ -1,0 +1,99 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-www
+spec:
+  redirectRegex:
+    regex: ^https?://www.moc-?ljudem.si/(.*)
+    replacement: https://mocljudem.si/${1}
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: redirect-domain
+spec:
+  redirectRegex:
+    regex: ^https?://moc-ljudem.si/(.*)
+    replacement: https://mocljudem.si/${1}
+    permanent: true
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: enable-cors
+spec:
+  headers:
+    accessControlAllowOriginList:
+      - "https://mocljudem.si"
+    accessControlAllowMethods:
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+    accessControlAllowHeaders:
+      - "*"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mocljudem
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.middlewares: |
+      traefik-redirect-to-https@kubernetescrd,
+      mocljudem-redirect-www@kubernetescrd,
+      mocljudem-redirect-domain@kubernetescrd
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - mocljudem.si
+        - www.mocljudem.si
+        - moc-ljudem.si
+        - www.moc-ljudem.si
+      secretName: mocljudem-tls
+  rules:
+    - host: mocljudem.si
+      http: &http_paths
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mocljudem
+                port:
+                  number: 8000
+    - host: www.mocljudem.si
+      http: *http_paths
+    - host: moc-ljudem.si
+      http: *http_paths
+    - host: www.moc-ljudem.si
+      http: *http_paths
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mocljudem-nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.middlewares: |
+      mocljudem-enable-cors@kubernetescrd
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - files.mocljudem.si
+      secretName: mocljudem-nginx-tls
+  rules:
+    - host: files.mocljudem.si
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: mocljudem-nginx
+                port:
+                  number: 80
