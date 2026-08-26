@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-{% block title %}{% endblock %}
-{% block title_suffix %}
-{% wagtail_site as current_site %}
-{% if current_site and current_site.site_name %}{{ current_site.site_name }}{% endif %}
-{% endblock %}
-
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
