@@ -43,8 +43,8 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.middlewares: |
       traefik-redirect-to-https@kubernetescrd,
-      mocljudem-redirect-www@kubernetescrd,
-      mocljudem-redirect-domain@kubernetescrd
+      mocljudem-xxredirect-www@kubernetescrd,
+      xxmocljudem-redirect-domain@kubernetescrd
 spec:
   ingressClassName: nginx
   tls:
@@ -79,7 +79,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.middlewares: |
-      mocljudem-enable-cors@kubernetescrd
+      mocljudem-xxenable-cors@kubernetescrd
 spec:
   ingressClassName: nginx
   tls:
