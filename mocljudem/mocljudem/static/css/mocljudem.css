@@ -125,7 +125,6 @@ body {
   color: var(--color-white);
 }
 
-/* TODO
 .page-content {
   display: flex;
   flex-direction: column;
@@ -139,7 +138,6 @@ body {
     flex: 1;
   }
 }
-*/
 
 .container {
   max-width: 75rem;
@@ -164,9 +162,19 @@ a {
   background: var(--color-dark);
   padding-block: 0.75rem;
 
-  img {
+  .logo {
     @media (max-width: 575.98px) {
-      margin-inline: auto;
+      text-align: center;
+    }
+
+    .logo-link {
+      display: inline-block;
+      height: 4rem;
+
+      img {
+        width: auto;
+        height: 100%;
+      }
     }
   }
 }

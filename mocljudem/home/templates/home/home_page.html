@@ -7,13 +7,10 @@
 {% endblock extra_css %}
 
 {% block content %}
-<header class="page-header">
-  <div class="container">
-    {% image page.logo height-65 %}
-  </div>
-</header>
 
-<main class="page-content">
+{% include "home/partials/header.html" %}
+
+<main class="main-content">
   <div class="container">
     <div class="hero-text">
       <h1 class="text">{{ page.hero_text|richtext }}</h1>
