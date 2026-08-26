@@ -1,23 +1,56 @@
-{% load static wagtailcore_tags wagtailuserbar %}
+{% load static wagtailcore_tags wagtailimages_tags wagtailuserbar %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sl">
     <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-            {% wagtail_site as current_site %}
-            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-            {% endblock %}
-        </title>
-        {% if page.search_description %}
-        <meta name="description" content="{{ page.search_description }}" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="color-scheme" content="dark">
+
+        <link rel="icon" type="image/svg+xml" href="{% static 'favicons/favicon.svg' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" href="{% static 'favicons/favicon-96x96.png' %}" sizes="96x96">
+
+        {% wagtail_site as current_site %}
+        {% with current_site.root_page.specific as root_page %}
+
+        {% if page == root_page %}
+        <title>                             {% if page.seo_title %}{{ page.seo_title }} | {% endif %}{% if current_site and current_site.site_name %}{{ current_site.site_name }}{% endif %}</title>
+        <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }} | {% endif %}{% if current_site and current_site.site_name %}{{ current_site.site_name }}{% endif %}">
+        <meta property="og:title"  content="{% if page.seo_title %}{{ page.seo_title }} | {% endif %}{% if current_site and current_site.site_name %}{{ current_site.site_name }}{% endif %}">
+        {% else %}
+        <title>                             {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% if current_site and current_site.site_name %} | {{ current_site.site_name }}{% endif %}</title>
+        <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% if current_site and current_site.site_name %} | {{ current_site.site_name }}{% endif %}">
+        <meta property="og:title"  content="{% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}{% if current_site and current_site.site_name %} | {{ current_site.site_name }}{% endif %}">
         {% endif %}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="color-scheme" content="dark" />
+
+        {% if page.search_description %}
+        <meta name="description"         content="{{ page.search_description }}">
+        <meta property="og:description"  content="{{ page.search_description }}">
+        <meta name="twitter:description" content="{{ page.search_description }}">
+        {% elif root_page.search_description %}
+        <meta name="description"         content="{{ root_page.search_description }}">
+        <meta property="og:description"  content="{{ root_page.search_description }}">
+        <meta name="twitter:description" content="{{ root_page.search_description }}">
+        {% endif %}
+
+        {% if page.meta_image %}
+        {% image page.meta_image max-1200x630 as og_image %}
+        <meta property="og:image" content="{{ og_image.url }}">
+        <meta name="twitter:image" content="{{ og_image.url }}">
+        {% elif root_page.meta_image %}
+        {% image root_page.meta_image max-1200x630 as og_image %}
+        <meta property="og:image" content="{{ og_image.url }}">
+        <meta name="twitter:image" content="{{ og_image.url }}">
+        {% endif %}
+
+        {% endwith %}
+
+        <meta name="author" content="Danes je nov dan">
+        <meta name="twitter:creator" content="@danesjenovdan">
+
+        <meta property="og:type" content="website">
+        <meta name="twitter:card" content="summary_large_image">
 
         {% if request.in_preview_panel %}
         <base target="_blank">
@@ -25,6 +58,8 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'css/fonts/selfhosted.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/mocljudem.css' %}">
+
+        <script defer data-domain="mocljudem.si" src="https://plausible.lb.djnd.si/js/script.js"></script>
     </head>
 
     <body class="{% block body_class %}{% endblock %}">

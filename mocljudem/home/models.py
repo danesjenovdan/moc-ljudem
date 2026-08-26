@@ -7,7 +7,26 @@ from wagtail.models import Page
 from .blocks import LinkBlock, StatusTypeBlock
 
 
-class HomePage(Page):
+class BasePage(Page):
+    meta_image = models.ForeignKey(
+        "wagtailimages.Image",
+        on_delete=models.SET_NULL,
+        related_name="+",
+        null=True,
+        blank=True,
+        verbose_name="Meta slika",
+        help_text="Slika, ki bo prikazana pri deljenju strani na socialnih omrežjih.",
+    )
+
+    promote_panels = Page.promote_panels + [
+        FieldPanel("meta_image"),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class HomePage(BasePage):
     logo = models.ForeignKey(
         "wagtailimages.Image",
         on_delete=models.SET_NULL,
@@ -103,7 +122,7 @@ class HomePage(Page):
         verbose_name_plural = "Domače strani"
 
 
-class CampaignPage(Page):
+class CampaignPage(BasePage):
     description = RichTextField(
         null=True,
         blank=True,
@@ -146,7 +165,7 @@ class CampaignPage(Page):
         verbose_name_plural = "Kampanje"
 
 
-class TimelinePage(Page):
+class TimelinePage(BasePage):
     icon = models.ForeignKey(
         "wagtailimages.Image",
         on_delete=models.SET_NULL,

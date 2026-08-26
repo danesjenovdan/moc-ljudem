@@ -105,7 +105,7 @@ h6 {
   /* default status color */
   --status-color-current: var(--color-white);
   /* status colors */
-  --status-color-empty: var(--color-light-1);
+  --status-color-empty: var(--color-light-2);
   --status-color-blue: var(--color-babyblue);
   --status-color-green: var(--color-green);
   --status-color-yellow: var(--color-yellow);
