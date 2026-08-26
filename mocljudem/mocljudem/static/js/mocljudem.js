@@ -2,34 +2,46 @@ document.addEventListener("DOMContentLoaded", function () {
   const expandButtons = document.querySelectorAll(".expand-button");
   expandButtons.forEach((button) => {
     const statusEl = button.closest(".status");
+    const descriptionCol = statusEl.querySelector(".description-col");
+
+    function expandDescription() {
+      statusEl.classList.add("expanded");
+      statusEl.style.cursor = "";
+      button.setAttribute("aria-expanded", "true");
+      button.setAttribute("aria-label", "Strni");
+      descriptionCol.setAttribute("aria-hidden", "false");
+      descriptionCol.removeAttribute("hidden");
+    }
+
+    function collapseDescription() {
+      statusEl.classList.remove("expanded");
+      statusEl.style.cursor = "pointer";
+      button.setAttribute("aria-expanded", "false");
+      button.setAttribute("aria-label", "Razširi");
+      descriptionCol.setAttribute("aria-hidden", "true");
+      descriptionCol.setAttribute("hidden", "until-found");
+    }
+
+    descriptionCol.addEventListener("beforematch", function () {
+      expandDescription();
+    });
 
     button.addEventListener("click", function () {
-      const descriptionCol = statusEl.querySelector(".description-col");
-      const isExpanded = descriptionCol.getAttribute("aria-hidden") === "false";
-      descriptionCol.setAttribute("aria-hidden", isExpanded ? "true" : "false");
+      const isExpanded = statusEl.classList.contains("expanded");
       if (isExpanded) {
-        statusEl.classList.remove("expanded");
-        statusEl.style.cursor = "pointer";
-        button.setAttribute("aria-expanded", "false");
-        button.setAttribute("aria-label", "Razširi");
+        collapseDescription();
       } else {
-        statusEl.classList.add("expanded");
-        statusEl.style.cursor = "";
-        button.setAttribute("aria-expanded", "true");
-        button.setAttribute("aria-label", "Strni");
+        expandDescription();
       }
     });
 
     statusEl.addEventListener("click", function (event) {
       const closestButton = event.target.closest(".expand-button");
-      if (closestButton === button) {
-        return;
-      }
       const isExpanded = statusEl.classList.contains("expanded");
-      if (isExpanded) {
+      if (closestButton === button || isExpanded) {
         return;
       }
-      button.click();
+      expandDescription();
     });
     statusEl.style.cursor = "pointer";
   });

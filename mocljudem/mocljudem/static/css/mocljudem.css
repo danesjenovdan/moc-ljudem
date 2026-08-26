@@ -872,10 +872,6 @@ a {
             .description-col {
               grid-column: 2;
 
-              &[aria-hidden="true"] {
-                display: none;
-              }
-
               .description {
                 margin-top: 0.5rem;
               }
