@@ -4,7 +4,7 @@ metadata:
   name: redirect-www
 spec:
   redirectRegex:
-    regex: ^https?://www.moc-?ljudem.si/(.*)
+    regex: ^https?://www.mocljudem.si/(.*)
     replacement: https://mocljudem.si/${1}
     permanent: true
 ---
