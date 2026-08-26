@@ -4,7 +4,7 @@ metadata:
   name: redirect-www
 spec:
   redirectRegex:
-    regex: ^https?://www.mocljudem.si/(.*)
+    regex: ^https?://www.moc-?ljudem.si/(.*)
     replacement: https://mocljudem.si/${1}
     permanent: true
 ---
@@ -43,10 +43,10 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.middlewares: |
       traefik-redirect-to-https@kubernetescrd,
-      mocljudem-xxredirect-www@kubernetescrd,
-      xxmocljudem-redirect-domain@kubernetescrd
+      mocljudem-redirect-www@kubernetescrd,
+      mocljudem-redirect-domain@kubernetescrd
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
     - hosts:
         - mocljudem.si
@@ -79,9 +79,9 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-production"
     traefik.ingress.kubernetes.io/router.middlewares: |
-      mocljudem-xxenable-cors@kubernetescrd
+      mocljudem-enable-cors@kubernetescrd
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
     - hosts:
         - files.mocljudem.si
