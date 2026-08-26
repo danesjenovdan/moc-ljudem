@@ -84,7 +84,7 @@
             </div>
             <div class="statuses">
               {% for status in timeline.statuses %}
-              <div class="status status--{{ status.value.status_type }} {% if forloop.last %}expanded{% endif %}">
+              <div class="status status--{{ status.value.status_type }}">
                 <div class="icon-col">
                   <div class="status-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 29 31">
@@ -100,7 +100,7 @@
                 </div>
                 <div class="expand-col">
                   {% if status.value.description or status.value.links %}
-                  <button type="button" aria-label="{% if forloop.last %}Strni{% else %}Razširi{% endif %}" aria-expanded="{% if forloop.last %}true{% else %}false{% endif %}" class="expand-button">
+                  <button type="button" aria-label="Razširi" aria-expanded="false" class="expand-button">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000" viewBox="0 0 28 28">
                       <rect width="27" height="27" x="27.5" y=".5" rx="13.5" transform="rotate(90 27.5 .5)" />
                       <path d="m6 11 8 7.5 7.5-7.5" />
@@ -108,7 +108,7 @@
                   </button>
                   {% endif %}
                 </div>
-                <div class="description-col" aria-hidden="{% if forloop.last %}false{% else %}true{% endif %}">
+                <div class="description-col" aria-hidden="true">
                   {% if status.value.description %}
                   <div class="description">{{ status.value.description|richtext }}</div>
                   {% endif %}
