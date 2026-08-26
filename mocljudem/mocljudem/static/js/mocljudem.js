@@ -17,4 +17,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+
+  const newsletterForm = document.querySelector(".newsletter-form");
+  if (newsletterForm) {
+    newsletterForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const campaign_slug = "danes-je-nov-dan";
+      const segment_id = 21;
+      const email = this.querySelector("#newsletter-email").value;
+
+      let url = `https://moj.djnd.si/${campaign_slug}/prijava?segment_id=${segment_id}`;
+      url += `&email=${encodeURIComponent(email)}`;
+      window.open(`${url}`, `_blank`);
+    });
+  }
 });

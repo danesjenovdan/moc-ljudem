@@ -171,6 +171,129 @@ a {
   }
 }
 
+.page-footer {
+  background: var(--color-dark);
+  padding-block: 2.5rem;
+  margin-top: 10rem;
+
+  @media (max-width: 575.98px) {
+    margin-top: 3rem;
+  }
+
+  .footer-row {
+    display: flex;
+    gap: var(--gutter);
+    justify-content: space-around;
+
+    @media (max-width: 575.98px) {
+      flex-direction: column;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .footer-col {
+      flex: 1;
+      max-width: 16rem;
+
+      @media (max-width: 575.98px) {
+        width: 100%;
+        text-align: center;
+      }
+
+      em {
+        font-weight: 500;
+        font-style: normal;
+        color: var(--color-babyblue);
+      }
+
+      .lead {
+        font-size: 1.125rem;
+        font-weight: 700;
+      }
+
+      .relaxed {
+        margin-top: 0.5rem;
+      }
+
+      .footer-button {
+        display: block;
+        padding-block: 0.5625rem;
+        padding-inline: 1rem;
+        background: var(--color-babyblue);
+        border: 1px solid var(--color-black);
+        border-radius: 3rem;
+        font-weight: 700;
+        line-height: 1;
+        text-decoration: none;
+        color: var(--color-black);
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &:focus-visible {
+          outline: 2px solid var(--color-orange);
+          outline-offset: 2px;
+          border-radius: 3.75rem;
+        }
+      }
+
+      .support-box {
+        .text {
+          text-align: center;
+        }
+
+        .buttons {
+          margin-top: 1.25rem;
+          display: grid;
+          gap: 0.5rem;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .newsletter-form {
+        margin-top: 0.625rem;
+
+        .form-group {
+          margin-bottom: 0.625rem;
+
+          label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+            margin-bottom: 0;
+            font-size: 0.875rem;
+
+            input[type="email"] {
+              outline: none;
+              width: 100%;
+              height: 2rem;
+              background-color: var(--color-white);
+              border: 1px solid var(--color-black);
+              font-size: 1rem;
+              line-height: 2rem;
+              color: var(--color-black);
+              padding: 0 0.5rem;
+
+              &:focus-visible {
+                outline: 2px solid var(--color-orange);
+                outline-offset: 2px;
+              }
+            }
+          }
+
+          .submit-button {
+            min-width: 13ch;
+
+            @media (max-width: 575.98px) {
+              margin-inline: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 .hero-text {
   max-width: 90ch;
   margin-inline: auto;
