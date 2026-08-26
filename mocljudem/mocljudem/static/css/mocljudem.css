@@ -748,6 +748,10 @@ a {
               .expand-col {
                 .expand-button {
                   transform: rotate(180deg);
+
+                  &:hover {
+                    color: var(--color-orange);
+                  }
                 }
               }
             }
@@ -854,6 +858,7 @@ a {
                 height: 1.75rem;
                 background: transparent;
                 border: none;
+                color: var(--color-light-2);
                 scale: 1.0001;
 
                 &:focus-visible {
@@ -886,6 +891,16 @@ a {
                 @media (max-width: 575.98px) {
                   flex-direction: column;
                   gap: 0.5rem;
+                }
+              }
+            }
+
+            &:not(.expanded):has(.expand-button):hover {
+              background: var(--color-white);
+
+              .expand-col {
+                .expand-button {
+                  color: var(--color-orange);
                 }
               }
             }
