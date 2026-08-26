@@ -8,4 +8,4 @@ resources:
 images:
   - name: mocljudem
     newName: rg.fr-par.scw.cloud/djnd/mocljudem
-    newTag: '4c793d8f0d5e09e8e77ec9eb498263cb398b727a'
+    newTag: '445a08e30788164b4c1d2169810e9891b415522c'
