@@ -180,125 +180,208 @@ a {
 }
 
 .page-footer {
-  background: var(--color-dark);
-  padding-block: 2.5rem;
   margin-top: 10rem;
 
   @media (max-width: 575.98px) {
     margin-top: 3rem;
   }
 
-  .footer-row {
-    display: flex;
-    gap: var(--gutter);
-    justify-content: space-around;
+  .main-footer {
+    padding-block: 2.5rem;
+    background: var(--color-dark);
 
-    @media (max-width: 575.98px) {
-      flex-direction: column;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .footer-col {
-      flex: 1;
-      max-width: 16rem;
+    .footer-row {
+      display: flex;
+      gap: var(--gutter);
+      justify-content: space-around;
 
       @media (max-width: 575.98px) {
-        width: 100%;
-        text-align: center;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
       }
 
-      em {
-        font-weight: 500;
-        font-style: normal;
-        color: var(--color-babyblue);
-      }
+      .footer-col {
+        flex: 1;
+        max-width: 16rem;
 
-      .lead {
-        font-size: 1.125rem;
-        font-weight: 700;
-      }
-
-      .relaxed {
-        margin-top: 0.5rem;
-      }
-
-      .footer-button {
-        display: block;
-        padding-block: 0.5625rem;
-        padding-inline: 1rem;
-        background: var(--color-babyblue);
-        border: 1px solid var(--color-black);
-        border-radius: 3rem;
-        font-weight: 700;
-        line-height: 1;
-        text-decoration: none;
-        color: var(--color-black);
-        text-align: center;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        transition: background-color 0.125s ease-in-out;
-
-        &:hover {
-          background: var(--color-white);
-        }
-
-        &:focus-visible {
-          outline: 2px solid var(--color-orange);
-          outline-offset: 2px;
-          border-radius: 3.75rem;
-        }
-      }
-
-      .support-box {
-        .text {
+        @media (max-width: 575.98px) {
+          width: 100%;
           text-align: center;
         }
 
-        .buttons {
-          margin-top: 1.25rem;
-          display: grid;
-          gap: 0.5rem;
-          grid-template-columns: repeat(2, 1fr);
+        em {
+          font-weight: 500;
+          font-style: normal;
+          color: var(--color-babyblue);
+        }
+
+        .lead {
+          font-size: 1.125rem;
+          font-weight: 700;
+        }
+
+        .relaxed {
+          margin-top: 0.5rem;
+        }
+
+        .footer-button {
+          display: block;
+          padding-block: 0.5625rem;
+          padding-inline: 1rem;
+          background: var(--color-babyblue);
+          border: 1px solid var(--color-black);
+          border-radius: 3rem;
+          font-weight: 700;
+          line-height: 1;
+          text-decoration: none;
+          color: var(--color-black);
+          text-align: center;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: background-color 0.125s ease-in-out;
+
+          &:hover {
+            background: var(--color-white);
+          }
+
+          &:focus-visible {
+            outline: 2px solid var(--color-orange);
+            outline-offset: 2px;
+            border-radius: 3.75rem;
+          }
+        }
+
+        .support-box {
+          .text {
+            text-align: center;
+          }
+
+          .buttons {
+            margin-top: 1.25rem;
+            display: grid;
+            gap: 0.5rem;
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        .newsletter-form {
+          margin-top: 0.625rem;
+
+          .form-group {
+            margin-bottom: 0.625rem;
+
+            label {
+              display: flex;
+              flex-direction: column;
+              gap: 0.125rem;
+              margin-bottom: 0;
+              font-size: 0.875rem;
+
+              input[type="email"] {
+                outline: none;
+                width: 100%;
+                height: 2rem;
+                background-color: var(--color-white);
+                border: 1px solid var(--color-black);
+                font-size: 1rem;
+                line-height: 2rem;
+                color: var(--color-black);
+                padding: 0 0.5rem;
+
+                &:focus-visible {
+                  outline: 2px solid var(--color-orange);
+                  outline-offset: 2px;
+                }
+              }
+            }
+
+            .submit-button {
+              min-width: 13ch;
+
+              @media (max-width: 575.98px) {
+                margin-inline: auto;
+              }
+            }
+          }
         }
       }
+    }
+  }
 
-      .newsletter-form {
-        margin-top: 0.625rem;
+  .sub-footer {
+    padding-block: 0.5rem;
+    background: var(--color-white);
+    color: var(--color-black);
 
-        .form-group {
-          margin-bottom: 0.625rem;
+    @media (max-width: 575.98px) {
+      padding-block: 1rem;
+    }
 
-          label {
-            display: flex;
-            flex-direction: column;
-            gap: 0.125rem;
-            margin-bottom: 0;
-            font-size: 0.875rem;
+    .footer-row {
+      display: flex;
+      gap: var(--gutter);
+      justify-content: space-between;
+      align-items: center;
 
-            input[type="email"] {
-              outline: none;
-              width: 100%;
-              height: 2rem;
-              background-color: var(--color-white);
-              border: 1px solid var(--color-black);
-              font-size: 1rem;
-              line-height: 2rem;
-              color: var(--color-black);
-              padding: 0 0.5rem;
+      @media (max-width: 767.98px) {
+        flex-direction: column;
+        gap: 2rem;
+      }
 
-              &:focus-visible {
-                outline: 2px solid var(--color-orange);
-                outline-offset: 2px;
+      .footer-col {
+        .footer-block {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+
+          &.csf-block {
+            @media (max-width: 575.98px) {
+              flex-direction: column-reverse;
+              gap: 0.5rem;
+            }
+
+            .csf-logo {
+              height: 2.75rem;
+            }
+
+            .support-lead {
+              max-width: 22ch;
+              font-size: 0.75rem;
+
+              @media (max-width: 575.98px) {
+                text-align: center;
               }
             }
           }
 
-          .submit-button {
-            min-width: 13ch;
-
+          &.cnvos-block {
             @media (max-width: 575.98px) {
-              margin-inline: auto;
+              flex-direction: column;
+              gap: 0.5rem;
+            }
+
+            .cnvos-logo,
+            .pip-logo,
+            .dobradruzba-logo {
+              height: 1.5rem;
+            }
+
+            .support-small {
+              font-size: 0.625rem;
+            }
+
+            .logos {
+              display: flex;
+              gap: 1rem;
+              align-items: center;
+            }
+          }
+
+          a {
+            &:focus-visible {
+              outline: 2px solid var(--color-orange);
+              outline-offset: 2px;
             }
           }
         }
