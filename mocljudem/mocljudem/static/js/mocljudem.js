@@ -43,7 +43,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       expandDescription();
     });
-    statusEl.style.cursor = "pointer";
+
+    const isExpanded = statusEl.classList.contains("expanded");
+    if (!isExpanded) {
+      statusEl.style.cursor = "pointer";
+    }
   });
 
   const newsletterForm = document.querySelector(".newsletter-form");

@@ -217,6 +217,14 @@ class TimelinePage(BasePage):
                                 required=False,
                             ),
                         ),
+                        (
+                            "expanded",
+                            blocks.BooleanBlock(
+                                required=False,
+                                label="Razširi status",
+                                help_text="Prikaži status razširjen, namesto da ga uporabnik mora klikniti, da se razširi",
+                            ),
+                        ),
                     ],
                     icon="radio-empty",
                     label="Status",
