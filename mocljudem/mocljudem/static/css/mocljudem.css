@@ -779,7 +779,7 @@ a {
                 width: 1rem;
                 background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 5 40"><path stroke="%23000" d="M2.5 45q-4-2.5 0-5t0-5 0-5 0-5 0-5 0-5 0-5 0-5 0-5 0-5"/></svg>');
                 background-repeat: repeat-y;
-                background-position: center;
+                background-position: top center;
                 background-size: 0.3125rem auto;
                 top: anchor(center --status-icon-first);
                 bottom: anchor(center --status-icon-last);
