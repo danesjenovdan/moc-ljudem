@@ -102,6 +102,7 @@ spec:
               cpu: 400m
         - name: mocljudem-nginx
           image: nginx:alpine
+          imagePullPolicy: Always
           volumeMounts:
             - name: mocljudem-storage
               mountPath: /usr/share/nginx/html
