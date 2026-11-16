@@ -1,4 +1,4 @@
-FROM python:3.14-slim-trixie AS builder
+FROM python:3.15-slim-trixie AS builder
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
@@ -40,7 +40,7 @@ COPY --chown=wagtail:wagtail . .
 RUN --mount=type=cache,target=/root/.cache/uv \
 	uv sync --locked --no-dev
 
-FROM python:3.14-slim-trixie AS runtime
+FROM python:3.15-slim-trixie AS runtime
 
 # Install runtime system packages required by Wagtail and Django.
 # These are the runtime libraries needed by the compiled Python packages.
